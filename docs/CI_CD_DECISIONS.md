@@ -34,3 +34,4 @@ We integrated security directly into the pipeline (`.github/workflows/ci-cd.yaml
 - **Implementation:** 
   - The final step of the GitHub Actions pipeline checks out the hypothetical GitOps repo (`your-org/sample-nodejs-gitops`), uses `sed` to bump the image tag in the Helm `values.yaml` to the new Git SHA, and commits the change.
   - ArgoCD monitors this GitOps repo (as configured in `deploy/argocd/application.yaml`). When it sees the new commit, it automatically pulls the changes and applies them to the Kubernetes cluster, completing the deployment.
+
