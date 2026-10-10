@@ -64,10 +64,18 @@ jobs:
         with:
           image-ref: '${{ env.IMAGE_NAME }}:test'
           format: 'table'
+          output: 'trivy-results.txt'
           exit-code: '1'             # Blocks deployment if vulnerabilities are found
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'  # Only fail on HIGH and CRITICAL
+
+      - name: Upload Trivy Scan Results
+        uses: actions/upload-artifact@v4
+        if: always() # Ensure this runs even if the Trivy scan fails
+        with:
+          name: trivy-scan-results
+          path: trivy-results.txt
 
       # If the scan passes, log in and push to the private registry (GHCR)
       - name: Log in to GitHub Container Registry
