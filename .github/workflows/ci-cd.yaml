@@ -8,7 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # Docker requires image names to be completely lowercase.
+  IMAGE_NAME: bramlybar/sample-nodejs
 
 jobs:
   # 1. SAST (Static Application Security Testing) & Dependency Scanning
@@ -106,7 +107,7 @@ jobs:
       - name: Checkout GitOps Repository
         uses: actions/checkout@v4
         with:
-          repository: 'your-org/sample-nodejs-gitops' # A separate repository for GitOps
+          repository: 'BramlyBar/sample-nodejs-gitops' # A separate repository for GitOps
           token: ${{ secrets.GITOPS_PAT }}
           path: 'gitops'
 
