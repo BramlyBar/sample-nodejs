@@ -4,7 +4,10 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install \
+    && rm -rf /usr/local/lib/node_modules/npm \
+    && rm -rf /usr/local/bin/npm \
+    && rm -rf /usr/local/bin/npx
 
 COPY . .
 
